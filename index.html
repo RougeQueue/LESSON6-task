@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <link href="style.css" rel="stylesheet" />
+
+    <title>おみくじアプリ</title>
+  </head>
+  <body>
+    <div class="app-header-contents">
+      <h1>- おみくじアプリ -</h1>
+      <h2>今日のあなたの運勢は・・・</h2>
+      <button class="start-button" type="button">
+        運勢を占う！
+      </button>
+    </div>
+
+    <div class="result">
+      <div class="row">
+        <div class="radius money">
+          <p class="title">金運</p>
+          <p class="stars"></p>
+          <p class="detail"></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="radius work">
+          <p class="title">仕事運</p>
+          <p class="stars"></p>
+          <p class="detail"></p>
+        </div>
+        <div class="radius health">
+          <p class="title">健康運</p>
+          <p class="stars"></p>
+          <p class="detail"></p>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+    // ここに処理を記載します
+      $(function(){
+        $('.start-button').click(function() {
+
+        //金運・仕事運・健康運の乱数設定
+        let MoneyNum = Math.floor( Math.random() * 3 ) + 1;
+        let WorkNum = Math.floor( Math.random() * 3 ) + 1;
+        let HealthNum = Math.floor( Math.random() * 3 ) + 1;
+
+        //金運の乱数から占い結果を指定
+        if(MoneyNum == 1){
+         MoneyStars = "stars：★";
+         MoneyDetail = "detail：悪い傾向が見られます！財布の紐は絞めておくと吉です！";
+        }else if(MoneyNum == 2){
+         MoneyStars = "stars：★★";
+         MoneyDetail = "detail：まずまず金運です！使いすぎには注意しましょう！";
+        }else if(MoneyNum == 3){
+         MoneyStars = "stars：★★★";
+         MoneyDetail = "detail：最高の金運です！いつの間にかお金が溜まっているかも・・・？";
+        }
+        //仕事運の乱数から占い結果を指定
+        if(WorkNum == 1){
+         WorkStars = "stars：★";
+         WorkDetail = "detail：悪い傾向が見られます！自信過剰にならないように注意しましょう";
+        }else if(WorkNum == 2){
+         WorkStars = "stars：★★";
+         WorkDetail = "detail：まずまず仕事運です！普段通り仕事が進むでしょう！";
+        }else if(WorkNum == 3){
+         WorkStars = "stars：★★★";
+         WorkDetail = "detail：最高の仕事運です！いつも以上にチャンスが巡ってくるかも・・・？";
+        }
+        //健康運の乱数から占い結果を指定
+        if(HealthNum == 1){
+         HealthStars = "stars：★";
+         HealthDetail = "detail：悪い傾向が見られます！ケガにご注意を・・・";
+        }else if(HealthNum == 2){
+         HealthStars = "stars：★★";
+         HealthDetail = "detail：まずまず健康運です！無理せず体を動かしましょう！";
+        }else if(HealthNum == 3){
+         HealthStars = "stars：★★★";
+         HealthDetail = "detail：最高の健康運です！ランニングの距離を伸ばしても良いですね！";
+        }
+
+        //占い結果を表示
+        $('.result').fadeIn(500);
+        $('.radius.money .stars').text(MoneyStars);
+        $('.radius.money .detail').text(MoneyDetail);
+        $('.radius.work .stars').text(WorkStars);
+        $('.radius.work .detail').text(WorkDetail);
+        $('.radius.health .stars').text(HealthStars);
+        $('.radius.health .detail').text(HealthDetail);
+
+        //ボタンの表示変更
+        $('.start-button').toggleClass('restart');
+          if($(this).hasClass('restart')) {
+            $('.restart').text('もう一度占う！');
+          }else {
+            $('.start-button').text('運勢を占う！');
+            //resultの非表示
+            $('.result').fadeOut(500);
+            }
+        });
+      });
+    </script>
+  </body>
+</html>
+
