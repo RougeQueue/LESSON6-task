@@ -13,7 +13,7 @@
     <div class="app-header-contents">
       <h1>- おみくじアプリ -</h1>
       <h2>今日のあなたの運勢は・・・</h2>
-      <button class="start-button" type="button">
+      <button class="start-button a" type="button">
         運勢を占う！
       </button>
     </div>
@@ -42,69 +42,54 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script>
-    // ここに処理を記載します
-      $(function(){
-        $('.start-button').click(function() {
+      // start-buttonを押した時の処理
+       $(function(){
+        $('.a').click(function() {
+// console.log("a");
+          //占い結果の配列一覧
+          const fortuneResults = {
+            money: [
+                   {stars:"★★★", detail:"最高の金運です！いつの間にかお金が溜まっているかも・・・？"},
+                   {stars:"★★", detail:"まずまず金運です！使いすぎには注意しましょう！"},
+                   {stars:"★", detail:"悪い傾向が見られます！財布の紐は絞めておくと吉です！"}
+                   ],
+            work: [
+                   {stars:"★★★", detail:"最高の仕事運です！いつも以上にチャンスが巡ってくるかも・・・？"},
+                   {stars:"★★", detail:"まずまず仕事運です！普段通り仕事が進むでしょう！"},
+                   {stars:"★", detail:"悪い傾向が見られます！自信過剰にならないように注意しましょう"}
+                  ],
+            health: [
+                   {stars:"★★★", detail:"最高の健康運です！ランニングの距離を伸ばしても良いですね！"},
+                   {stars:"★★", detail:"まずまず健康運です！無理せず体を動かしましょう！"},
+                   {stars:"★", detail:"悪い傾向が見られます！ケガにご注意を・・・"}
+                    ]
+          };
 
-        //金運・仕事運・健康運の乱数設定
-        let MoneyNum = Math.floor( Math.random() * 3 ) + 1;
-        let WorkNum = Math.floor( Math.random() * 3 ) + 1;
-        let HealthNum = Math.floor( Math.random() * 3 ) + 1;
+          //占い結果を選択し、表示
+          
+          for (let i in fortuneResults) {
+            let idx = Math.floor( Math.random() * 3);
+            $("."+i).find(".stars").text(fortuneResults[i][idx]["stars"]);
+            $("."+i).find(".detail").text(fortuneResults[i][idx]["detail"]);
+          };
+          $('.result').fadeIn(1000);
 
-        //金運の乱数から占い結果を指定
-        if(MoneyNum == 1){
-         MoneyStars = "stars：★";
-         MoneyDetail = "detail：悪い傾向が見られます！財布の紐は絞めておくと吉です！";
-        }else if(MoneyNum == 2){
-         MoneyStars = "stars：★★";
-         MoneyDetail = "detail：まずまず金運です！使いすぎには注意しましょう！";
-        }else if(MoneyNum == 3){
-         MoneyStars = "stars：★★★";
-         MoneyDetail = "detail：最高の金運です！いつの間にかお金が溜まっているかも・・・？";
-        }
-        //仕事運の乱数から占い結果を指定
-        if(WorkNum == 1){
-         WorkStars = "stars：★";
-         WorkDetail = "detail：悪い傾向が見られます！自信過剰にならないように注意しましょう";
-        }else if(WorkNum == 2){
-         WorkStars = "stars：★★";
-         WorkDetail = "detail：まずまず仕事運です！普段通り仕事が進むでしょう！";
-        }else if(WorkNum == 3){
-         WorkStars = "stars：★★★";
-         WorkDetail = "detail：最高の仕事運です！いつも以上にチャンスが巡ってくるかも・・・？";
-        }
-        //健康運の乱数から占い結果を指定
-        if(HealthNum == 1){
-         HealthStars = "stars：★";
-         HealthDetail = "detail：悪い傾向が見られます！ケガにご注意を・・・";
-        }else if(HealthNum == 2){
-         HealthStars = "stars：★★";
-         HealthDetail = "detail：まずまず健康運です！無理せず体を動かしましょう！";
-        }else if(HealthNum == 3){
-         HealthStars = "stars：★★★";
-         HealthDetail = "detail：最高の健康運です！ランニングの距離を伸ばしても良いですね！";
-        }
+          //ボタンの表示変更
+          $('.a').removeClass('a');
+          // $('.start-button').toggleClass('start-button');
 
-        //占い結果を表示
-        $('.result').fadeIn(500);
-        $('.radius.money .stars').text(MoneyStars);
-        $('.radius.money .detail').text(MoneyDetail);
-        $('.radius.work .stars').text(WorkStars);
-        $('.radius.work .detail').text(WorkDetail);
-        $('.radius.health .stars').text(HealthStars);
-        $('.radius.health .detail').text(HealthDetail);
-
-        //ボタンの表示変更
-        $('.start-button').toggleClass('restart');
-          if($(this).hasClass('restart')) {
-            $('.restart').text('もう一度占う！');
-          }else {
-            $('.start-button').text('運勢を占う！');
-            //resultの非表示
-            $('.result').fadeOut(500);
-            }
         });
-      });
+
+        //restartボタンを押した時の処理
+
+       });
+      //  $(function() {
+      //     $('.restart-button').click(function() {
+      //     $('.result').fadeOut(1000);
+      //     console.log("78");
+      //     });
+      //   });
+
     </script>
   </body>
 </html>
